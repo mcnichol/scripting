@@ -1,0 +1,36 @@
+{
+  "centos": [{
+     "version": "CENTOS_VERSION",
+     "isos": [{
+       "minimal": {
+         "url": "MINIMAL_URL",
+         "sha1": "MINIMAL_SHA1",
+         "sha256": "MINIMAL_SHA256"
+       }},{
+       "dvd": {
+         "url": "DVD_URL",
+         "sha1": "DVD_SHA1",
+         "sha256": "DVD_SHA256"
+       }},{
+       "everything": {
+         "url": "EVERYTHING_URL",
+         "sha1": "EVERYTHING_SHA1",
+         "sha256": "EVERYTHING_SHA256"
+       }},{
+       "net": {
+         "url": "NET_URL",
+         "sha1": "NET_SHA1",
+         "sha256": "NET_SHA256"
+       }},{
+       "live-kde": {
+         "url": "LIVE_KDE_URL",
+         "sha1": "LIVE_KDE_SHA1",
+         "sha256": "LIVE_KDE_SHA256"
+       }},{
+       "live-gnome": {
+         "url": "LIVE_GNOME_URL",
+         "sha1": "LIVE_GNOME_SHA1",
+         "sha256": "LIVE_GNOME_SHA256"
+       }}]
+   }]
+ }
