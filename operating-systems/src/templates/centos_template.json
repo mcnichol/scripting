@@ -1,36 +1,36 @@
 {
   "centos": [{
-     "version": "CENTOS_VERSION",
-     "isos": [{
+     "version": "centos_version",
+     "isos": {
        "minimal": {
-         "url": "MINIMAL_URL",
-         "sha1": "MINIMAL_SHA1",
-         "sha256": "MINIMAL_SHA256"
-       }},{
+         "url": "minimal_url",
+         "sha1": "minimal_sha1",
+         "sha256": "minimal_sha256"
+       },
        "dvd": {
-         "url": "DVD_URL",
-         "sha1": "DVD_SHA1",
-         "sha256": "DVD_SHA256"
-       }},{
+         "url": "dvd_url",
+         "sha1": "dvd_sha1",
+         "sha256": "dvd_sha256"
+       },
        "everything": {
-         "url": "EVERYTHING_URL",
-         "sha1": "EVERYTHING_SHA1",
-         "sha256": "EVERYTHING_SHA256"
-       }},{
-       "net": {
-         "url": "NET_URL",
-         "sha1": "NET_SHA1",
-         "sha256": "NET_SHA256"
-       }},{
-       "live-kde": {
-         "url": "LIVE_KDE_URL",
-         "sha1": "LIVE_KDE_SHA1",
-         "sha256": "LIVE_KDE_SHA256"
-       }},{
-       "live-gnome": {
-         "url": "LIVE_GNOME_URL",
-         "sha1": "LIVE_GNOME_SHA1",
-         "sha256": "LIVE_GNOME_SHA256"
-       }}]
+         "url": "everything_url",
+         "sha1": "everything_sha1",
+         "sha256": "everything_sha256"
+       },
+       "netinstall": {
+         "url": "netinstall_url",
+         "sha1": "netinstall_sha1",
+         "sha256": "netinstall_sha256"
+       },
+       "livekde": {
+         "url": "live_kde_url",
+         "sha1": "live_kde_sha1",
+         "sha256": "live_kde_sha256"
+       },
+       "livegnome": {
+         "url": "livegnome_url",
+         "sha1": "livegnome_sha1",
+         "sha256": "livegnome_sha256"
+       }}
    }]
  }
