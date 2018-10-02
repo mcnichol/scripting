@@ -43,4 +43,4 @@ EOF
 echo "Creating template script: $script_filename"
 chmod 755 "$script_filename"
 
-echo "Finished creating script: $script_filename from tempalte"
+echo "Finished creating script: $script_filename from v1.0 template"
