@@ -6,6 +6,7 @@ SCRIPT_DIR=${BASH_SOURCE%/*}
 OSYS_WORKING_DIR="$HOME/.osys"
 OSYS_OS_LIST="$OSYS_WORKING_DIR/os.list"
 OSYS_TEMPLATE_DIR="$SCRIPT_DIR/src/templates/"
+SCRIPT_NAME="osys"
 
 function init(){
   if [ ! -d "$OSYS_WORKING_DIR" ]; then
@@ -66,10 +67,11 @@ case "$1" in
         echo "Operating SYStem Manager is a tool for the download and management of various Linux distros"
         echo ""
         echo "You may want to start with seeing which Linux Distros and versions OSYS is currently aware of."
+        echo " > ${SCRIPT_NAME} list"
       ;;
     *)
         echo "Usage Instructions:"
-        echo " > ./osys.sh --help"
+        echo "> ./${SCRIPT_NAME} --help"
       ;;
 esac
 
