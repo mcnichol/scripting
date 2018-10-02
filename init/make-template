@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+set -e
+
+[ -z $1 ] && script_filename="my-template" || script_filename="$1"
+
+cat <<EOF > $script_filename
+#!/usr/bin/env bash
+
+set -e
+
+# Guard clause for alerting on incomplete calls
+function guard_clause {
+    fail_script=false
+
+    [ -z "\$1" ] && { echo "Missing: Value1"; fail_script=true; }
+    [ -z "\$2" ] && { echo "Missing: Value2"; fail_script=true; }
+
+    if \$fail_script; then
+        exit 1;
+    fi
+}
+
+#Remove comment below to leverage guard_cluase function
+#guard_clause
+
+case "\$1" in
+    action)
+        echo "Performing Action"
+        echo "Do Work..."
+        ;;
+    *)
+        echo "This is a starter-template, edit this for your usage instructions"
+        echo "Usage Instructions:"
+        echo "$ ./${script_filename} action"
+        exit 0
+        ;;
+esac
+
+exit 0;
+EOF
+
+echo "Creating template script: $script_filename"
+chmod 755 "$script_filename"
+
+echo "Finished creating script: $script_filename from tempalte"
