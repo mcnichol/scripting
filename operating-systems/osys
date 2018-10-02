@@ -5,7 +5,7 @@ echo "Operating SYStem CLI"
 SCRIPT_DIR=${BASH_SOURCE%/*}
 OSYS_WORKING_DIR="$HOME/.osys"
 OSYS_OS_LIST="$OSYS_WORKING_DIR/os.list"
-OSYS_TEMPLATE_DIR="$SCRIPT_DIR/src/templates/"
+OSYS_TEMPLATE_DIR="$SCRIPT_DIR/src/templates"
 SCRIPT_NAME="osys"
 
 function init(){
@@ -30,14 +30,32 @@ case "$1" in
               DELIMITER="</a>"
 
               cp $OSYS_TEMPLATE_DIR/centos_template.json $OSYS_OS_LIST
-
               sed "s/CENTOS_VERSION/$CENTOS_VERSION/g" $OSYS_OS_LIST > $OSYS_OS_LIST.bak
               mv $OSYS_OS_LIST.bak $OSYS_OS_LIST
+
+              ## START DEBUG BLOCK ##
+              if [ ! -z "$DEBUG" ]; then
+                echo "CENTOS_VERSION=$CENTOS_VERSION"
+                echo "CENTOS_MIRROR=http://sjc.edge.kernel.org/centos/$CENTOS_VERSION/isos/x86_64"
+                echo ""
+                echo "Printing out HTML Anchors from centOS Mirror"
+                echo "$(curl -sL $CENTOS_MIRROR | xmllint --html --xpath //a -)"
+                echo ""
+                echo "Copying centos_template.json to:"
+                echo "cp $OSYS_TEMPLATE_DIR/centos_template.json $OSYS_OS_LIST"
+              fi 
+              ## END DEBUG BLOCK ##
 
               s=$HTML_ANCHORS_LIST$DELIMITER
               while [[ $s ]]; do
                 CURRENT_ANCHOR=$(echo "${s%%"$DELIMITER"*}" | cut -d'>' -f2)
                 if $(echo $CURRENT_ANCHOR | grep -Eiq "^centos.*iso$|^sha.*txt$"); then
+
+                  ## START DEBUG BLOCK ##
+                  if [ ! -z "$DEBUG" ]; then
+                    echo "CURRENT ANCHOR Matching .iso || .sha: $CURRENT_ANCHOR"
+                  fi
+                  ## END DEBUG BLOCK ##
 
                   echo "Adding link"
                   FILETYPE=$(echo $CURRENT_ANCHOR | cut -d'-' -f4 | tr '[:upper:]' '[:lower:]')
@@ -49,6 +67,7 @@ case "$1" in
                   else
                     SHA_LIST="$(curl -sL $CENTOS_MIRROR/$FILETYPE)"
                     echo $SHA_LIST
+                    echo "Printing SHA"
                   fi
 
 
@@ -57,6 +76,12 @@ case "$1" in
               done;
             ;;
           *)
+              ## START DEBUG BLOCK ##
+              if [ ! -z "$DEBUG" ]; then
+                echo "Dumping contents of OS List located at: $OSYS_OS_LIST"
+              fi
+              ## END DEBUG BLOCK ##
+
               cat "$OSYS_OS_LIST"
               echo ""
               echo "To update this list run ./osys list update"
@@ -67,7 +92,10 @@ case "$1" in
         echo "Operating SYStem Manager is a tool for the download and management of various Linux distros"
         echo ""
         echo "You may want to start with seeing which Linux Distros and versions OSYS is currently aware of."
-        echo " > ${SCRIPT_NAME} list"
+        echo "> ${SCRIPT_NAME} list"
+        echo ""
+        echo "Get more information running with DEBUG=on"
+        echo "> DEBUG=on ${SCRIPT_NAME} list"
       ;;
     *)
         echo "Usage Instructions:"
