@@ -6,6 +6,7 @@ set -e
 
 cat <<EOF > $script_filename
 #!/usr/bin/env bash
+#v1.0
 
 set -e
 
