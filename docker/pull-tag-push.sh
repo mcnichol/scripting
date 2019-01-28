@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -ex
 
 if [ "$#" -ne 1 ]; then
   echo "Usage Instructions: ./pull-tag-push.sh [docker-registry]/[docker-project]"
@@ -26,10 +26,12 @@ for dockerImage in $ES_INIT_LATEST $HARBOR_ELASTICSEARCH_LATEST $HARBOR_GEOSEARC
 done
 
 for dockerImage in $ES_INIT_LATEST $HARBOR_ELASTICSEARCH_LATEST $HARBOR_GEOSEARCH_LATEST; do
+  echo "docker tag $GUNA_DOCKERHUB/$dockerImage $HARBOR_REGISTRY/$HARBOR_PROJECT/$dockerImage"
   docker tag $GUNA_DOCKERHUB/$dockerImage $HARBOR_REGISTRY/$HARBOR_PROJECT/$dockerImage
 done
 
 for dockerImage in $ES_INIT_LATEST $HARBOR_ELASTICSEARCH_LATEST $HARBOR_GEOSEARCH_LATEST; do
+  echo "docker push $HARBOR_REGISTRY/$HARBOR_PROJECT/$dockerImage"
   docker push $HARBOR_REGISTRY/$HARBOR_PROJECT/$dockerImage
 done
 

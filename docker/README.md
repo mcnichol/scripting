@@ -7,3 +7,5 @@
 
 ### Todo:
 * Generify so it's not pushing to Gunas repo
+* Add login to script
+* Provide more informative feedback/validation
