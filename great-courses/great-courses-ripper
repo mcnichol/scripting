@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+#v1.0
+
+set -e
+
+# Guard clause for alerting on incomplete calls
+function guard_clause {
+    fail_script=false
+
+    [ -z "$1" ] && { echo "Missing: Value1"; fail_script=true; }
+    [ -z "$2" ] && { echo "Missing: Value2"; fail_script=true; }
+
+    if $fail_script; then
+        exit 1;
+    fi
+}
+
+#Remove comment below to leverage guard_cluase function
+#guard_clause
+
+case "$1" in
+  download)
+    curl -o 01.mp4 https://vtgc.viewlift.com/video_assets/2015/mp4/1301/1301_01/1301_01_9216kbps.mp4
+    #curl -o 02.mp4 https://vtgc.viewlift.com/video_assets/2015/mp4/1301/1301_02/1301_02_9216kbps.mp4
+    #curl -o 03.mp4 https://vtgc.viewlift.com/video_assets/2015/mp4/1301/1301_03/1301_03_9216kbps.mp4
+    #curl -o 04.mp4 https://vtgc.viewlift.com/video_assets/2015/mp4/1301/1301_04/1301_04_9216kbps.mp4
+    #curl -o 05.mp4 https://vtgc.viewlift.com/video_assets/2015/mp4/1301/1301_05/1301_05_9216kbps.mp4
+    #curl -o 06.mp4 https://vtgc.viewlift.com/video_assets/2015/mp4/1301/1301_06/1301_06_9216kbps.mp4
+    #curl -o 07.mp4 https://vtgc.viewlift.com/video_assets/2015/mp4/1301/1301_07/1301_07_9216kbps.mp4
+    #curl -o 08.mp4 https://vtgc.viewlift.com/video_assets/2015/mp4/1301/1301_08/1301_08_9216kbps.mp4
+    #curl -o 09.mp4 https://vtgc.viewlift.com/video_assets/2015/mp4/1301/1301_09/1301_09_9216kbps.mp4
+
+    #for i in {10..24}; do
+      #curl -o "${i}.mp4" "https://vtgc.viewlift.com/video_assets/2015/mp4/1301/1301_${i}/1301_${i}_9216kbps.mp4"
+    #done
+    
+    ;;
+  *)
+    echo "This is a starter-template, edit this for your usage instructions"
+    echo "Usage Instructions:"
+    echo "$ ./my-template action"
+    exit 0
+    ;;
+esac
+
+exit 0;
