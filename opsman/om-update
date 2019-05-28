@@ -1,0 +1,24 @@
+#Todo - Unhappy path when OM Does not exist L:2
+
+OM_VERSION="$(om --version)"
+OM_GH_LATEST_VERSION="$(curl -sL https://api.github.com/repos/pivotal-cf/om/releases/latest | jq '.tag_name' | tr -d \"\"\")"
+
+if [ $OM_VERSION != $OM_GH_LATEST_VERSION ]; then
+  echo "Outdated version of OM Tool"
+  echo "Latest version: $OM_GH_LATEST_VERSION"
+  echo "Current version: $OM_VERSION"
+  printf "Would you like to update?: [y/N]"
+  read -r confirm
+  
+  if [ "$(echo $confirm | awk '{print tolower($0)}')" == 'y' ]; then
+    echo "Downloading OM $OM_GH_LATEST_VERSION"
+    curl -sLo om "https://github.com/pivotal-cf/om/releases/download/$OM_GH_LATEST_VERSION/om-darwin"
+
+    chmod 755 om
+    mv om ../bin
+  fi
+else
+  echo "You are up to date!"
+fi
+
+printf "You are running OM Version: %s\n" $(om --version)
