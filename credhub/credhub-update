@@ -1,0 +1,27 @@
+#Todo - Unhappy path when CREDHUB Does not exist L:2
+
+CH_VERSION="$(credhub --version | grep -i cli | awk '{print $3}')"
+echo $CH_VERSION
+
+CH_GH_LATEST_VERSION="$(curl -sL https://api.github.com/repos/cloudfoundry-incubator/credhub-cli/releases/latest | jq '.tag_name' | tr -d \"\"\")"
+echo $CH_GH_LATEST_VERSION
+
+if [ $CH_VERSION != $CH_GH_LATEST_VERSION ]; then
+  echo "Outdated version of credhub-cli"
+  echo "Latest version: $CH_GH_LATEST_VERSION"
+  echo "Current version: $CH_VERSION"
+  printf "Would you like to update?: [y/N]"
+  read -r confirm
+  
+  if [ "$(echo $confirm | awk '{print tolower($0)}')" == 'y' ]; then
+    echo "Downloading CredHub $CH_GH_LATEST_VERSION"
+    curl -sL "https://github.com/cloudfoundry-incubator/credhub-cli/releases/download/$CH_GH_LATEST_VERSION/credhub-darwin-$CH_GH_LATEST_VERSION.tgz" | tar xvf -
+    chmod 755 credhub
+    mv credhub ../bin
+  fi
+else
+  echo "You are up to date!"
+fi
+
+printf "You are running CredHub Version: %s\n" $(credhub --version)
+
